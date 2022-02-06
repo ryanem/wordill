@@ -3,12 +3,11 @@ import { Row, RowState } from "./Row";
 import dictionary from "./dictionary.json";
 import { Clue, clue, describeClue, violation } from "./clue";
 import { Keyboard } from "./Keyboard";
-import targetList from "./targets.json";
+import targets from "./targets.json";
 import {
   describeSeed,
   dictionarySet,
   Difficulty,
-  pick,
   resetRng,
   seed,
   speak,
@@ -30,17 +29,11 @@ interface GameProps {
   keyboardLayout: string;
 }
 
-const targets = targetList.slice(0, targetList.indexOf("murky") + 1); // Words no rarer than this one
-const minLength = 4;
-const maxLength = 11;
+const startDate = new Date(2022, 1, 6).getTime();
 
-function randomTarget(wordLength: number): string {
-  const eligible = targets.filter((word) => word.length === wordLength);
-  let candidate: string;
-  do {
-    candidate = pick(eligible);
-  } while (/\*/.test(candidate));
-  return candidate;
+function dailyTarget(): string {
+  const index = Math.floor((Date.now() - startDate) / 86400000) % targets.length;
+  return targets[index];
 }
 
 function getChallengeUrl(target: string): string {
@@ -65,13 +58,6 @@ if (initChallenge && !dictionarySet.has(initChallenge)) {
   challengeError = true;
 }
 
-function parseUrlLength(): number {
-  const lengthParam = urlParam("length");
-  if (!lengthParam) return 5;
-  const length = Number(lengthParam);
-  return length >= minLength && length <= maxLength ? length : 5;
-}
-
 function parseUrlGameNumber(): number {
   const gameParam = urlParam("game");
   if (!gameParam) return 1;
@@ -84,16 +70,14 @@ function Game(props: GameProps) {
   const [guesses, setGuesses] = useState<string[]>([]);
   const [currentGuess, setCurrentGuess] = useState<string>("");
   const [challenge, setChallenge] = useState<string>(initChallenge);
-  const [wordLength, setWordLength] = useState(
-    challenge ? challenge.length : parseUrlLength()
-  );
   const [gameNumber, setGameNumber] = useState(parseUrlGameNumber());
   const [target, setTarget] = useState(() => {
     resetRng();
     // Skip RNG ahead to the parsed initial game number:
-    for (let i = 1; i < gameNumber; i++) randomTarget(wordLength);
-    return challenge || randomTarget(wordLength);
+    for (let i = 1; i < gameNumber; i++) dailyTarget();
+    return challenge || dailyTarget();
   });
+  const wordLength = target.length;
   const [hint, setHint] = useState<string>(
     challengeError
       ? `Invalid challenge string, playing random game.`
@@ -117,10 +101,8 @@ function Game(props: GameProps) {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
     setChallenge("");
-    const newWordLength =
-      wordLength >= minLength && wordLength <= maxLength ? wordLength : 5;
-    setWordLength(newWordLength);
-    setTarget(randomTarget(newWordLength));
+    const target = dailyTarget();
+    setTarget(target);
     setHint("");
     setGuesses([]);
     setCurrentGuess("");
@@ -259,29 +241,29 @@ function Game(props: GameProps) {
   return (
     <div className="Game" style={{ display: props.hidden ? "none" : "block" }}>
       <div className="Game-options">
-        <label htmlFor="wordLength">Letters:</label>
-        <input
-          type="range"
-          min={minLength}
-          max={maxLength}
-          id="wordLength"
-          disabled={
+        {/* <label htmlFor="wordLength">Letters:</label> */}
+        {/* <input
+            type="range"
+            min={minLength}
+            max={maxLength}
+            id="wordLength"
+            disabled={
             gameState === GameState.Playing &&
             (guesses.length > 0 || currentGuess !== "" || challenge !== "")
-          }
-          value={wordLength}
-          onChange={(e) => {
+            }
+            value={wordLength}
+            onChange={(e) => {
             const length = Number(e.target.value);
             resetRng();
             setGameNumber(1);
             setGameState(GameState.Playing);
             setGuesses([]);
             setCurrentGuess("");
-            setTarget(randomTarget(length));
+            setTarget(dailyTarget(length));
             setWordLength(length);
             setHint(`${length} letters`);
-          }}
-        ></input>
+            }}
+            ></input> */}
         <button
           style={{ flex: "0 0 auto" }}
           disabled={gameState !== GameState.Playing || guesses.length === 0}
@@ -319,11 +301,7 @@ function Game(props: GameProps) {
         onKey={onKey}
       />
       <div className="Game-seed-info">
-        {challenge
-          ? "playing a challenge game"
-          : seed
-          ? `${describeSeed(seed)} — length ${wordLength}, game ${gameNumber}`
-          : "playing a random game"}
+        A medical word game inspired by Wordle
       </div>
       <p>
         <button
