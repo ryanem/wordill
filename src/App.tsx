@@ -39,7 +39,7 @@ function App() {
   const [difficulty, setDifficulty] = useSetting<number>("difficulty", 0);
   const [keyboard, setKeyboard] = useSetting<string>(
     "keyboard",
-    "qwertyuiop-asdfghjkl-BzxcvbnmE"
+    "qwertyuiop-asdfghjkl-EzxcvbnmB"
   );
   const [enterLeft, setEnterLeft] = useSetting<boolean>("enter-left", false);
 
@@ -88,9 +88,9 @@ function App() {
           visibility: page === "game" ? "visible" : "hidden",
         }}
       >
-        <a href={seed ? "?random" : "?seed=" + todaySeed}>
+        {/* <a href={seed ? "?random" : "?seed=" + todaySeed}>
           {seed ? "Random" : "Today's"}
-        </a>
+        </a> */}
       </div>
       {page === "about" && <About />}
       {page === "settings" && (
@@ -145,7 +145,7 @@ function App() {
           </div>
           <div className="Settings-setting">
             <label htmlFor="keyboard-setting">Keyboard layout:</label>
-            <select
+            {/* <select
               name="keyboard-setting"
               id="keyboard-setting"
               value={keyboard}
@@ -156,7 +156,7 @@ function App() {
               <option value="qwertzuiop-asdfghjkl-ByxcvbnmE">QWERTZ</option>
               <option value="BpyfgcrlE-aoeuidhtns-qjkxbmwvz">Dvorak</option>
               <option value="qwfpgjluy-arstdhneio-BzxcvbkmE">Colemak</option>
-            </select>
+            </select> */}
             <input
               style={{ marginLeft: 20 }}
               id="enter-left-setting"
@@ -164,7 +164,7 @@ function App() {
               checked={enterLeft}
               onChange={() => setEnterLeft((x: boolean) => !x)}
             />
-            <label htmlFor="enter-left-setting">"Enter" on left side</label>
+            <label htmlFor="enter-left-setting">"Enter" on right side</label>
           </div>
         </div>
       )}
@@ -174,8 +174,8 @@ function App() {
         difficulty={difficulty}
         colorBlind={colorBlind}
         keyboardLayout={keyboard.replaceAll(
-          /[BE]/g,
-          (x) => (enterLeft ? "EB" : "BE")["BE".indexOf(x)]
+          /[EB]/g,
+          (x) => (enterLeft ? "BE" : "EB")["EB".indexOf(x)]
         )}
       />
     </div>

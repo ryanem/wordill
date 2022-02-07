@@ -6,12 +6,14 @@ export function About() {
   return (
     <div className="App-about">
       <p>
-        <i>hello wordl</i> is a remake of the word game{" "}
+        Created by Dr. Ryan McKillip and Brian Sanders.
+      </p>
+      <p>
+        <i>wordill</i> is a remake of the word game{" "}
         <a href="https://www.powerlanguage.co.uk/wordle/">
           <i>Wordle</i>
         </a>{" "}
-        by <a href="https://twitter.com/powerlanguish">powerlanguage</a>, which
-        I think is based on the TV show <i>Lingo</i>.
+        by <a href="https://twitter.com/powerlanguish">powerlanguage</a>.
       </p>
       <p>
         You get {maxGuesses} tries to guess a target word.
@@ -71,15 +73,19 @@ export function About() {
         annotation={"Got it!"}
       />
       <p>
-        Report issues{" "}
-        <a href="https://github.com/lynn/hello-wordl/issues">here</a>, or tweet{" "}
-        <a href="https://twitter.com/chordbug">@chordbug</a>.
+        Report issues or submit ideas{" "}
+        <a href="mailto:wordillmail@gmail.com">here</a>.
       </p>
       <p>
         This game will be free and ad-free forever,
         <br />
-        but you can <a href="https://ko-fi.com/chordbug">buy me a coffee</a> if
+        but you can <a href="https://ko-fi.com/ryanmckillip">buy us a coffee</a> if
         you'd like.
+      </p>
+      <p>
+        Also, this game would not have been possible without the generosity of other developers on github, specifically @chordbug.
+        <br />
+        You can also <a href="https://ko-fi.com/chordbug">buy them a coffee</a>.
       </p>
     </div>
   );

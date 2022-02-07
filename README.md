@@ -1,8 +1,10 @@
-# hello wordl
+# wordill
 
-It's [Wordle](https://www.powerlanguage.co.uk/wordle/) but you can play forever!
+It's [Wordle](https://www.powerlanguage.co.uk/wordle/) using medical terms.
 
-Play it [**here**](https://hellowordl.net/).
+Play it [**here**](https://www.wordill.com/).
+
+We are very thankful to _hello wordl_ on github, which helped us create this remix. Their original code can be found [here](https://github.com/lynn/hello-wordl). Play it [**here**](https://hellowordl.net/).
 
 ## Introduction
 
@@ -16,26 +18,8 @@ Click _About_ inside the game to learn by example.
 
 In 2021, Josh "powerlanguage" Wardle created _Wordle_, a version of the Lingo word game that you can play once a day. The target word is the same for everyone each day, and you can share results to Twitter and compare with your friends. This made Wordle [go absolutely viral](https://www.nytimes.com/2022/01/03/technology/wordle-word-game-creator.html) around January 2022.
 
-I liked this game a lot, but wanted to play more than once a day, so I created my own version of it, where the words are random but you can play as much as like. I called it _hello wordl_, which is a sort of [bad programming joke](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program).
-
-## But playing once a day is the point!
-
-Don't get me wrong: I, too, think this is the most brilliant aspect of Wordle, and I don't aim to dethrone or improve on the "real" game.
-
-## My word contained two of the same letter!
-
-This can happen in Wordle too, and I give clues exactly the same way Wordle does. I think the game would be too easy if I got rid of double letters, so I won't.
-
 ## Where are the words coming from?
 
-To generate target words, I have been manually curating the top 25,000 or so entries of [Peter Norvig's English word frequency list](http://norvig.com/mayzner.html) to get rid of obscure words, plurals, conjugated verbs, inappropriate language, and British spellings (sorry). If you get dealt a strange target word, please open an issue on this here GitHub repository.
+We have used an online medical dictionary to generate target words. We have come up with about 190 5-letter medical words, so if you think of any others, send them our way.
 
-To check guesses, I use some variation of the _Official Tournament and Club Word List_ used in North American Scrabble tournaments. (I'm not a native English speaker, but my English tends mostly American.)
-
-## For developers
-
-You're very welcome to create your own Wordle offshoot/remix based on _hello wordl_. To get started, you can [fork the code](https://docs.github.com/en/get-started/quickstart/fork-a-repo) on GitHub.
-
-To run the code locally, first install [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm). Then, in this directory, open a terminal and run `npm install` followed by `npm run start`. _hello wordl_ will be running at http://localhost:3000/. Any changes you make to the source code will be reflected there. Have fun!
-
-Finally, `npm run deploy` will deploy your code to the `gh-pages` branch of your fork, so that everyone can play your version at https://yourname.github.io/hello-wordl (or the name of your fork if you renamed it). 
+From the original "hello-wordl" repository, we have continued to use the _Official Tournament and Club Word List_ used in North American Scrabble tournaments for a full dictionary of available words. 
