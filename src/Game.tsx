@@ -174,9 +174,7 @@ function Game(props: GameProps) {
       setCurrentGuess((guess) => "");
 
       const gameOver = (verbed: string) =>
-        `You ${verbed}! The answer was ${target.toUpperCase()}. (Enter to ${
-          challenge ? "play a random game" : "play again"
-        })`;
+        `You ${verbed}! The answer was ${target.toUpperCase()}. See you tomorrow.`;
 
       if (currentGuess === target) {
         setHint(gameOver("won"));
@@ -301,7 +299,7 @@ function Game(props: GameProps) {
         onKey={onKey}
       />
       <div className="Game-seed-info">
-        A medical word game inspired by Wordle
+        A daily medical word game inspired by Wordle.
       </div>
       <p>
         <button
