@@ -1,7 +1,6 @@
 [
   "bifid",
 "molar",
-"pupil",
 "stent",
 "edema",
 "locus",
@@ -36,6 +35,7 @@
 "chest",
 "flank",
 "yeast",
+"pupil",
 "histo",
 "leech",
 "incus",
